@@ -20,14 +20,10 @@ a { text-decoration: none; color: inherit; }
 /* ===== DEVICE MODES ===== */
 body.mobile {
   --bg-strength: 0.02;
-  --letter-max: 4;
-  --letter-size: 16vw;
   --letter-life: 4200ms;
 }
 body.desktop {
   --bg-strength: 0.07;
-  --letter-max: 7;
-  --letter-size: 32vw;
   --letter-life: 9000ms;
 }
 
@@ -46,7 +42,7 @@ body::before {
   pointer-events: none;
 }
 
-/* ===== NEON EDGES ===== */
+/* ===== EDGES ===== */
 .edge {
   position: fixed;
   inset: 0;
@@ -128,21 +124,17 @@ body::before {
   font-weight: 900;
   letter-spacing: 0.35em;
   cursor: pointer;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
-.btn:hover {
-  transform: scale(1.06);
-  box-shadow: 0 0 35px rgba(255,220,120,0.8);
-}
+.btn:hover { transform: scale(1.06); }
 
-/* ===== DONATE BUTTON ===== */
+/* ===== DONATE ===== */
 .donate-wrap {
   position: absolute;
-  bottom: 36px;
+  bottom: 32px;
+  width: 100%;
   display: flex;
   justify-content: center;
-  width: 100%;
 }
 
 .donate-btn {
@@ -157,17 +149,6 @@ body::before {
   font-size: 0.65rem;
   letter-spacing: 0.25em;
   font-weight: 800;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.donate-btn img {
-  height: 14px;
-  opacity: 0.85;
-}
-
-.donate-btn:hover {
-  transform: scale(1.06);
-  box-shadow: 0 0 30px rgba(180,80,255,0.6);
 }
 
 /* ===== UPDATES GRID ===== */
@@ -179,12 +160,30 @@ body::before {
   gap: 3rem;
 }
 
-/* ===== CENTER ===== */
 .center-col {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2.2rem;
+}
+
+/* ===== MERCH ===== */
+.merch-feature {
+  padding: 1.6rem;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.08);
+}
+
+.merch-img {
+  width: 100%;
+  border-radius: 14px;
+  margin-bottom: 1.2rem;
+}
+
+.merch-title {
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: 0.15em;
 }
 
 /* ===== FORM ===== */
@@ -196,23 +195,18 @@ form {
 }
 
 form input {
-  appearance: none;
   width: 260px;
-  padding: 0.95rem 1.4rem;
+  padding: 0.9rem;
   border-radius: 999px;
   border: 1px solid rgba(200,120,255,0.7);
   background: rgba(0,0,0,0.45);
   color: white;
   text-align: center;
-  letter-spacing: 0.18em;
-  font-size: 0.7rem;
 }
 
 /* ===== MOBILE ===== */
 @media (max-width: 900px) {
-  .updates-grid {
-    grid-template-columns: 1fr;
-  }
+  .updates-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -221,23 +215,50 @@ form input {
 <div class="edge"></div>
 <div id="cryptoField"></div>
 
+<!-- HOME -->
 <div class="screen active" id="home">
   <div class="home-stack">
     <img src="wizshtlogo_trans.png" class="logo" id="logo">
     <button class="btn" id="enterBtn">ENTER</button>
   </div>
 
-  <!-- DONATE -->
   <div class="donate-wrap">
     <a class="donate-btn" href="https://donorbox.org/wiz-rd-shit?" target="_blank">
-      <img src="https://donorbox.org/images/white_logo.svg" alt="">
-      DONATE
+      <img src="https://donorbox.org/images/white_logo.svg" height="14"> DONATE
     </a>
   </div>
 </div>
 
+<!-- UPDATES -->
 <div class="screen" id="updates">
-  <!-- updates page unchanged -->
+  <div class="updates-grid">
+
+    <a class="merch-feature" href="https://wizard.printful.me/product/unisex-hoodie" target="_blank">
+      <img src="hoodie-front.png" class="merch-img">
+      <div class="merch-title">WIZARD HOODIE</div>
+    </a>
+
+    <div class="center-col">
+      <div>
+        <a href="https://www.youtube.com/watch?v=H6cNCTofnrs" target="_blank">
+          <img src="https://img.youtube.com/vi/H6cNCTofnrs/hqdefault.jpg" width="260">
+        </a>
+      </div>
+
+      <form action="https://formspree.io/f/mrelgwzp" method="POST">
+        <input id="emailInput" type="email" name="email" placeholder="EMAIL FOR UPDATES" required>
+        <button class="btn" type="submit">SUBMIT</button>
+      </form>
+
+      <button class="btn" id="backBtn">BACK</button>
+    </div>
+
+    <a class="merch-feature" href="https://wizard.printful.me/product/hoodie" target="_blank">
+      <img src="hoodie-2.png" class="merch-img">
+      <div class="merch-title">WIZARD HOODIE II</div>
+    </a>
+
+  </div>
 </div>
 
 <script>
@@ -247,11 +268,35 @@ document.body.classList.add(isMobile ? "mobile" : "desktop");
 const home = document.getElementById("home");
 const updates = document.getElementById("updates");
 const enterBtn = document.getElementById("enterBtn");
+const backBtn = document.getElementById("backBtn");
+const cryptoField = document.getElementById("cryptoField");
+const emailInput = document.getElementById("emailInput");
+const logo = document.getElementById("logo");
 
 enterBtn.onclick = () => {
   home.classList.remove("active");
   updates.classList.add("active");
 };
+
+backBtn.onclick = () => {
+  updates.classList.remove("active");
+  home.classList.add("active");
+  cryptoField.innerHTML = "";
+};
+
+emailInput.addEventListener("keydown", e => {
+  if (e.key.length !== 1 || !/[a-zA-Z@._-]/.test(e.key)) return;
+  for (let i = 0; i < 3; i++) {
+    const el = document.createElement("div");
+    el.className = "crypto";
+    el.textContent = e.key.toUpperCase();
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.top = Math.random() * 100 + "vh";
+    el.style.fontSize = Math.random() * 18 + 10 + "vw";
+    cryptoField.appendChild(el);
+    setTimeout(() => el.remove(), 6000);
+  }
+});
 </script>
 </body>
 </html>
