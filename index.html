@@ -42,7 +42,7 @@ body::before {
   pointer-events: none;
 }
 
-/* ===== EDGES ===== */
+/* ===== NEON EDGES ===== */
 .edge {
   position: fixed;
   inset: 0;
@@ -87,7 +87,7 @@ body::before {
   opacity: 0;
   pointer-events: none;
   transform: translateY(12px) scale(0.98);
-  transition: opacity 700ms ease, transform 700ms ease, filter 700ms ease;
+  transition: opacity 700ms ease, transform 700ms ease;
 }
 
 .screen.active {
@@ -167,6 +167,17 @@ body::before {
   gap: 2.2rem;
 }
 
+/* ===== VIDEO ===== */
+.video-card img {
+  width: 260px;
+  border-radius: 14px;
+}
+.caption {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-align: center;
+}
+
 /* ===== MERCH ===== */
 .merch-feature {
   padding: 1.6rem;
@@ -239,10 +250,11 @@ form input {
     </a>
 
     <div class="center-col">
-      <div>
+      <div class="video-card">
         <a href="https://www.youtube.com/watch?v=H6cNCTofnrs" target="_blank">
-          <img src="https://img.youtube.com/vi/H6cNCTofnrs/hqdefault.jpg" width="260">
+          <img src="https://img.youtube.com/vi/H6cNCTofnrs/hqdefault.jpg">
         </a>
+        <div class="caption">Christmas In Wizard City</div>
       </div>
 
       <form action="https://formspree.io/f/mrelgwzp" method="POST">
@@ -273,6 +285,23 @@ const cryptoField = document.getElementById("cryptoField");
 const emailInput = document.getElementById("emailInput");
 const logo = document.getElementById("logo");
 
+/* ===== LOGO + BG REACTIVITY (RESTORED) ===== */
+if (!isMobile) {
+  document.addEventListener("mousemove", e => {
+    document.body.style.setProperty("--mx", e.clientX + "px");
+    document.body.style.setProperty("--my", e.clientY + "px");
+
+    const r = logo.getBoundingClientRect();
+    const dx = e.clientX - (r.left + r.width / 2);
+    const dy = e.clientY - (r.top + r.height / 2);
+    const d = Math.hypot(dx, dy);
+
+    const influence = Math.max(0, 1 - d / 320);
+    logo.style.transform = `scale(${1 + influence * 0.3})`;
+  });
+}
+
+/* ===== SCREEN SWAP ===== */
 enterBtn.onclick = () => {
   home.classList.remove("active");
   updates.classList.add("active");
@@ -284,8 +313,11 @@ backBtn.onclick = () => {
   cryptoField.innerHTML = "";
 };
 
+/* ===== CRYPTO LETTERS ===== */
 emailInput.addEventListener("keydown", e => {
   if (e.key.length !== 1 || !/[a-zA-Z@._-]/.test(e.key)) return;
+  if (cryptoField.children.length > 18) return;
+
   for (let i = 0; i < 3; i++) {
     const el = document.createElement("div");
     el.className = "crypto";
