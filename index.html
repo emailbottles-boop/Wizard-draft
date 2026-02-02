@@ -86,8 +86,14 @@ body::before {
 }
 
 @keyframes drift {
-  from { transform: translateY(40px) scale(1); opacity: 1; }
-  to   { transform: translateY(-180px) scale(1.3); opacity: 0; }
+  from {
+    transform: translateY(40px) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-180px) scale(1.3);
+    opacity: 0;
+  }
 }
 
 /* ===== SCREENS ===== */
@@ -124,9 +130,10 @@ body::before {
   font-weight: 900;
   letter-spacing: 0.35em;
   cursor: pointer;
+  text-decoration: none;
 }
 
-/* ===== VIDEO ===== */
+/* ===== UPDATES ===== */
 .video-card img {
   width: 260px;
   border-radius: 14px;
@@ -140,17 +147,19 @@ body::before {
 
 /* ===== MERCH FEATURE ===== */
 .merch-feature {
-  margin-top: 1rem;
-  padding: 1.6rem;
-  border-radius: 18px;
+  max-width: 320px;
+  padding: 1.5rem;
+  border-radius: 16px;
   background: rgba(255,255,255,0.08);
-  text-align: center;
-  cursor: pointer;
+  backdrop-filter: blur(6px);
+  box-shadow:
+    0 0 40px rgba(180,80,255,0.25),
+    inset 0 0 18px rgba(255,220,120,0.15);
   transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .merch-feature:hover {
-  transform: translateY(-6px) scale(1.02);
+  transform: translateY(-6px) scale(1.015);
   box-shadow:
     0 0 60px rgba(200,120,255,0.45),
     0 0 120px rgba(255,220,120,0.25),
@@ -158,14 +167,15 @@ body::before {
 }
 
 .merch-img {
-  width: 240px;
-  max-width: 70vw;
+  width: 100%;
   border-radius: 14px;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 0 28px rgba(200,120,255,0.55);
   transition: transform 0.35s ease, filter 0.35s ease, box-shadow 0.35s ease;
 }
 
 .merch-feature:hover .merch-img {
-  transform: scale(1.05);
+  transform: scale(1.04);
   filter: brightness(1.08) saturate(1.1);
   box-shadow:
     0 0 40px rgba(200,120,255,0.7),
@@ -173,10 +183,18 @@ body::before {
 }
 
 .merch-title {
-  margin-top: 1rem;
-  font-weight: 800;
-  letter-spacing: 0.2em;
+  font-weight: 900;
+  letter-spacing: 0.3em;
+  font-size: 0.75rem;
+  margin-bottom: 0.6rem;
   color: #fff2a8;
+}
+
+.merch-desc {
+  font-size: 0.7rem;
+  line-height: 1.6;
+  margin-bottom: 1.4rem;
+  opacity: 0.85;
 }
 
 /* ===== EMAIL ===== */
@@ -217,20 +235,21 @@ form input {
     <div class="caption">Christmas In Wizard City</div>
   </div>
 
-  <!-- MERCH -->
   <a
     href="https://wizard.printful.me/product/unisex-hoodie"
     target="_blank"
-    style="text-decoration:none; color:inherit;"
+    class="merch-feature"
   >
-    <div class="merch-feature">
-      <img
-        src="https://wizard.printful.me/static/media/unisex-hoodie.4f7e6c9c.png"
-        alt="Wizard Hoodie"
-        class="merch-img"
-      >
-      <div class="merch-title">WIZARD HOODIE — BUY NOW</div>
+    <img src="hoodie-front.png" alt="Wizard Hoodie" class="merch-img">
+
+    <div class="merch-title">WIZARD HOODIE</div>
+
+    <div class="merch-desc">
+      Arcane-weight fleece.<br>
+      Fulfilled by Printful.
     </div>
+
+    <div class="btn">BUY NOW</div>
   </a>
 
   <form action="https://formspree.io/f/mrelgwzp" method="POST">
@@ -298,7 +317,7 @@ emailInput.addEventListener("keydown", e => {
     el.style.top = Math.random() * 100 + "vh";
     el.style.fontSize =
       Math.random() * parseFloat(getComputedStyle(document.body).getPropertyValue("--letter-size")) + "vw";
-    el.style.transform = `rotate(${Math.random() * 360}deg)`;
+    el.style.transform = `rotate(${Math.random() < 0.3 ? 180 : Math.random() * 360}deg)`;
     cryptoField.appendChild(el);
     setTimeout(() => el.remove(), parseInt(getComputedStyle(document.body).getPropertyValue("--letter-life")));
   }
