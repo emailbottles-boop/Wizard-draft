@@ -86,14 +86,8 @@ body::before {
 }
 
 @keyframes drift {
-  from {
-    transform: translateY(40px) scale(1);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(-180px) scale(1.3);
-    opacity: 0;
-  }
+  from { transform: translateY(40px) scale(1); opacity: 1; }
+  to   { transform: translateY(-180px) scale(1.3); opacity: 0; }
 }
 
 /* ===== SCREENS ===== */
@@ -130,10 +124,9 @@ body::before {
   font-weight: 900;
   letter-spacing: 0.35em;
   cursor: pointer;
-  text-decoration: none;
 }
 
-/* ===== UPDATES ===== */
+/* ===== VIDEO ===== */
 .video-card img {
   width: 260px;
   border-radius: 14px;
@@ -147,36 +140,43 @@ body::before {
 
 /* ===== MERCH FEATURE ===== */
 .merch-feature {
-  max-width: 320px;
-  padding: 1.5rem;
+  margin-top: 1rem;
+  padding: 1.6rem;
+  border-radius: 18px;
   background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(6px);
-  border-radius: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.merch-feature:hover {
+  transform: translateY(-6px) scale(1.02);
   box-shadow:
-    0 0 40px rgba(180,80,255,0.25),
-    inset 0 0 18px rgba(255,220,120,0.15);
+    0 0 60px rgba(200,120,255,0.45),
+    0 0 120px rgba(255,220,120,0.25),
+    inset 0 0 22px rgba(255,220,120,0.2);
 }
 
 .merch-img {
-  width: 100%;
+  width: 240px;
+  max-width: 70vw;
   border-radius: 14px;
-  margin-bottom: 1.2rem;
-  box-shadow: 0 0 28px rgba(200,120,255,0.55);
+  transition: transform 0.35s ease, filter 0.35s ease, box-shadow 0.35s ease;
+}
+
+.merch-feature:hover .merch-img {
+  transform: scale(1.05);
+  filter: brightness(1.08) saturate(1.1);
+  box-shadow:
+    0 0 40px rgba(200,120,255,0.7),
+    0 0 90px rgba(255,220,120,0.35);
 }
 
 .merch-title {
-  font-weight: 900;
-  letter-spacing: 0.3em;
-  font-size: 0.75rem;
-  margin-bottom: 0.6rem;
+  margin-top: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
   color: #fff2a8;
-}
-
-.merch-desc {
-  font-size: 0.7rem;
-  line-height: 1.6;
-  margin-bottom: 1.4rem;
-  opacity: 0.85;
 }
 
 /* ===== EMAIL ===== */
@@ -211,36 +211,27 @@ form input {
 <div class="screen hidden" id="updates">
 
   <div class="video-card">
-    <a href="https://www.youtube.com/watch?v=H6cNCTofnrs" target="_blank" rel="noopener">
+    <a href="https://www.youtube.com/watch?v=H6cNCTofnrs" target="_blank">
       <img src="https://img.youtube.com/vi/H6cNCTofnrs/hqdefault.jpg">
     </a>
     <div class="caption">Christmas In Wizard City</div>
   </div>
 
-  <!-- FEATURED MERCH -->
-  <div class="merch-feature">
-    <img
-      src="https://wizard.printful.me/static/media/unisex-hoodie.4f7e6c9c.png"
-      alt="Wizard Hoodie"
-      class="merch-img"
-    >
-
-    <div class="merch-title">WIZARD HOODIE</div>
-
-    <div class="merch-desc">
-      Arcane-weight fleece.<br>
-      Summoned & fulfilled by Printful.
+  <!-- MERCH -->
+  <a
+    href="https://wizard.printful.me/product/unisex-hoodie"
+    target="_blank"
+    style="text-decoration:none; color:inherit;"
+  >
+    <div class="merch-feature">
+      <img
+        src="https://wizard.printful.me/static/media/unisex-hoodie.4f7e6c9c.png"
+        alt="Wizard Hoodie"
+        class="merch-img"
+      >
+      <div class="merch-title">WIZARD HOODIE — BUY NOW</div>
     </div>
-
-    <a
-      href="https://wizard.printful.me/product/unisex-hoodie"
-      target="_blank"
-      rel="noopener"
-      class="btn"
-    >
-      BUY NOW
-    </a>
-  </div>
+  </a>
 
   <form action="https://formspree.io/f/mrelgwzp" method="POST">
     <input id="emailInput" type="email" name="email" placeholder="EMAIL FOR UPDATES" required>
@@ -283,7 +274,6 @@ enterBtn.onclick = () => {
   home.classList.add("hidden");
   updates.classList.remove("hidden");
 };
-
 backBtn.onclick = () => {
   updates.classList.add("hidden");
   home.classList.remove("hidden");
@@ -307,15 +297,10 @@ emailInput.addEventListener("keydown", e => {
     el.style.left = Math.random() * 100 + "vw";
     el.style.top = Math.random() * 100 + "vh";
     el.style.fontSize =
-      Math.random() *
-      parseFloat(getComputedStyle(document.body).getPropertyValue("--letter-size")) +
-      "vw";
-    el.style.transform = `rotate(${Math.random() < 0.3 ? 180 : Math.random() * 360}deg)`;
+      Math.random() * parseFloat(getComputedStyle(document.body).getPropertyValue("--letter-size")) + "vw";
+    el.style.transform = `rotate(${Math.random() * 360}deg)`;
     cryptoField.appendChild(el);
-    setTimeout(
-      () => el.remove(),
-      parseInt(getComputedStyle(document.body).getPropertyValue("--letter-life"))
-    );
+    setTimeout(() => el.remove(), parseInt(getComputedStyle(document.body).getPropertyValue("--letter-life")));
   }
 });
 </script>
