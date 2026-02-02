@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
 html, body {
   margin: 0;
   height: 100%;
-  overflow: hidden;
+  overflow: hidden; can you please add my quickstore but make it advertised on my website all nice inn the html https://wizard.printful.me/product/unisex-hoodie 
   background: #07000f;
   font-family: system-ui, sans-serif;
   color: white;
@@ -130,7 +131,6 @@ body::before {
   font-weight: 900;
   letter-spacing: 0.35em;
   cursor: pointer;
-  text-decoration: none;
 }
 
 /* ===== UPDATES ===== */
@@ -145,38 +145,11 @@ body::before {
   letter-spacing: 0.2em;
 }
 
-/* ===== MERCH FEATURE ===== */
-.merch-feature {
-  max-width: 320px;
-  padding: 1.5rem;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(6px);
-  border-radius: 16px;
-  box-shadow:
-    0 0 40px rgba(180,80,255,0.25),
-    inset 0 0 18px rgba(255,220,120,0.15);
-}
-
-.merch-img {
-  width: 100%;
+.merch {
+  padding: 1.1rem;
   border-radius: 14px;
-  margin-bottom: 1.2rem;
-  box-shadow: 0 0 28px rgba(200,120,255,0.55);
-}
-
-.merch-title {
-  font-weight: 900;
-  letter-spacing: 0.3em;
-  font-size: 0.75rem;
-  margin-bottom: 0.6rem;
+  background: rgba(255,255,255,0.08);
   color: #fff2a8;
-}
-
-.merch-desc {
-  font-size: 0.7rem;
-  line-height: 1.6;
-  margin-bottom: 1.4rem;
-  opacity: 0.85;
 }
 
 /* ===== EMAIL ===== */
@@ -209,38 +182,14 @@ form input {
 </div>
 
 <div class="screen hidden" id="updates">
-
   <div class="video-card">
-    <a href="https://www.youtube.com/watch?v=H6cNCTofnrs" target="_blank" rel="noopener">
+    <a href="https://www.youtube.com/watch?v=H6cNCTofnrs" target="_blank">
       <img src="https://img.youtube.com/vi/H6cNCTofnrs/hqdefault.jpg">
     </a>
     <div class="caption">Christmas In Wizard City</div>
   </div>
 
-  <!-- FEATURED MERCH -->
-  <div class="merch-feature">
-    <img
-      src="https://wizard.printful.me/static/media/unisex-hoodie.4f7e6c9c.png"
-      alt="Wizard Hoodie"
-      class="merch-img"
-    >
-
-    <div class="merch-title">WIZARD HOODIE</div>
-
-    <div class="merch-desc">
-      Arcane-weight fleece.<br>
-      Summoned & fulfilled by Printful.
-    </div>
-
-    <a
-      href="https://wizard.printful.me/product/unisex-hoodie"
-      target="_blank"
-      rel="noopener"
-      class="btn"
-    >
-      BUY NOW
-    </a>
-  </div>
+  <div class="merch">Merchandise coming soon!</div>
 
   <form action="https://formspree.io/f/mrelgwzp" method="POST">
     <input id="emailInput" type="email" name="email" placeholder="EMAIL FOR UPDATES" required>
@@ -283,7 +232,6 @@ enterBtn.onclick = () => {
   home.classList.add("hidden");
   updates.classList.remove("hidden");
 };
-
 backBtn.onclick = () => {
   updates.classList.add("hidden");
   home.classList.remove("hidden");
@@ -307,15 +255,10 @@ emailInput.addEventListener("keydown", e => {
     el.style.left = Math.random() * 100 + "vw";
     el.style.top = Math.random() * 100 + "vh";
     el.style.fontSize =
-      Math.random() *
-      parseFloat(getComputedStyle(document.body).getPropertyValue("--letter-size")) +
-      "vw";
+      Math.random() * parseFloat(getComputedStyle(document.body).getPropertyValue("--letter-size")) + "vw";
     el.style.transform = `rotate(${Math.random() < 0.3 ? 180 : Math.random() * 360}deg)`;
     cryptoField.appendChild(el);
-    setTimeout(
-      () => el.remove(),
-      parseInt(getComputedStyle(document.body).getPropertyValue("--letter-life"))
-    );
+    setTimeout(() => el.remove(), parseInt(getComputedStyle(document.body).getPropertyValue("--letter-life")));
   }
 });
 </script>
