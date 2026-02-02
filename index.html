@@ -88,9 +88,16 @@ body::before {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4rem;
 }
 .hidden { display: none; }
+
+/* ===== HOME (STACKED) ===== */
+.home-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
 
 /* ===== LOGO ===== */
 .logo {
@@ -114,6 +121,15 @@ body::before {
   cursor: pointer;
 }
 
+/* ===== UPDATES LAYOUT ===== */
+.updates-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 4vw;
+}
+
 /* ===== CENTER COLUMN ===== */
 .center-col {
   display: flex;
@@ -134,7 +150,7 @@ body::before {
   text-align: center;
 }
 
-/* ===== MERCH (LEFT) ===== */
+/* ===== MERCH ===== */
 .merch-feature {
   width: 300px;
   padding: 1.6rem;
@@ -164,10 +180,11 @@ body::before {
   font-weight: 900;
   letter-spacing: 0.15em;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .buy-btn {
-  display: inline-block;
+  display: block;
   padding: 0.9rem 2.2rem;
   border-radius: 999px;
   background: linear-gradient(135deg, #ffe066, #b000ff);
@@ -175,6 +192,7 @@ body::before {
   font-weight: 900;
   letter-spacing: 0.3em;
   font-size: 0.7rem;
+  text-align: center;
 }
 
 /* ===== FORM ===== */
@@ -199,37 +217,46 @@ form input {
 <div class="edge"></div>
 <div id="cryptoField"></div>
 
+<!-- HOME -->
 <div class="screen" id="home">
-  <img src="wizshtlogo_trans.png" class="logo" id="logo">
-  <button class="btn" id="enterBtn">ENTER</button>
+  <div class="home-stack">
+    <img src="wizshtlogo_trans.png" class="logo" id="logo">
+    <button class="btn" id="enterBtn">ENTER</button>
+  </div>
 </div>
 
+<!-- UPDATES -->
 <div class="screen hidden" id="updates">
+  <div class="updates-grid">
 
-  <!-- LEFT: MERCH -->
-  <a class="merch-feature" href="https://wizard.printful.me/product/unisex-hoodie" target="_blank">
-    <img src="hoodie-front.png" class="merch-img" alt="Wizard Hoodie">
-    <div class="merch-title">WIZARD HOODIE</div>
-    <div class="buy-btn">BUY NOW</div>
-  </a>
+    <!-- LEFT MERCH -->
+    <a class="merch-feature" href="https://wizard.printful.me/product/unisex-hoodie" target="_blank">
+      <img src="hoodie-front.png" class="merch-img" alt="Wizard Hoodie">
+      <div class="merch-title">WIZARD HOODIE</div>
+      <div class="buy-btn">BUY NOW</div>
+    </a>
 
-  <!-- CENTER: VIDEO + EMAIL -->
-  <div class="center-col">
-    <div class="video-card">
-      <a href="https://www.youtube.com/watch?v=H6cNCTofnrs" target="_blank">
-        <img src="https://img.youtube.com/vi/H6cNCTofnrs/hqdefault.jpg">
-      </a>
-      <div class="caption">Christmas In Wizard City</div>
+    <!-- CENTER -->
+    <div class="center-col">
+      <div class="video-card">
+        <a href="https://www.youtube.com/watch?v=H6cNCTofnrs" target="_blank">
+          <img src="https://img.youtube.com/vi/H6cNCTofnrs/hqdefault.jpg">
+        </a>
+        <div class="caption">Christmas In Wizard City</div>
+      </div>
+
+      <form action="https://formspree.io/f/mrelgwzp" method="POST">
+        <input id="emailInput" type="email" name="email" placeholder="EMAIL FOR UPDATES" required>
+        <button class="btn" type="submit">SUBMIT</button>
+      </form>
+
+      <button class="btn" id="backBtn">BACK</button>
     </div>
 
-    <form action="https://formspree.io/f/mrelgwzp" method="POST">
-      <input id="emailInput" type="email" name="email" placeholder="EMAIL FOR UPDATES" required>
-      <button class="btn" type="submit">SUBMIT</button>
-    </form>
+    <!-- RIGHT EMPTY SLOT -->
+    <div></div>
 
-    <button class="btn" id="backBtn">BACK</button>
   </div>
-
 </div>
 
 <script>
