@@ -133,18 +133,6 @@ body::before {
   text-decoration: none;
 }
 
-/* ===== UPDATES ===== */
-.video-card img {
-  width: 260px;
-  border-radius: 14px;
-}
-
-.caption {
-  margin-top: 0.5rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-}
-
 /* ===== MERCH FEATURE ===== */
 .merch-feature {
   max-width: 320px;
@@ -162,8 +150,7 @@ body::before {
   transform: translateY(-6px) scale(1.015);
   box-shadow:
     0 0 60px rgba(200,120,255,0.45),
-    0 0 120px rgba(255,220,120,0.25),
-    inset 0 0 22px rgba(255,220,120,0.2);
+    0 0 120px rgba(255,220,120,0.25);
 }
 
 .merch-img {
@@ -171,47 +158,20 @@ body::before {
   border-radius: 14px;
   margin-bottom: 1.2rem;
   box-shadow: 0 0 28px rgba(200,120,255,0.55);
-  transition: transform 0.35s ease, filter 0.35s ease, box-shadow 0.35s ease;
+  transition: transform 0.35s ease, filter 0.35s ease;
 }
 
 .merch-feature:hover .merch-img {
   transform: scale(1.04);
   filter: brightness(1.08) saturate(1.1);
-  box-shadow:
-    0 0 40px rgba(200,120,255,0.7),
-    0 0 90px rgba(255,220,120,0.35);
 }
 
 .merch-title {
   font-weight: 900;
   letter-spacing: 0.3em;
   font-size: 0.75rem;
-  margin-bottom: 0.6rem;
-  color: #fff2a8;
-}
-
-.merch-desc {
-  font-size: 0.7rem;
-  line-height: 1.6;
   margin-bottom: 1.4rem;
-  opacity: 0.85;
-}
-
-/* ===== EMAIL ===== */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-form input {
-  width: 250px;
-  padding: 0.85rem;
-  border-radius: 999px;
-  border: 1px solid rgba(200,120,255,0.6);
-  background: rgba(0,0,0,0.45);
-  color: white;
-  text-align: center;
+  color: #fff2a8;
 }
 </style>
 </head>
@@ -228,34 +188,15 @@ form input {
 
 <div class="screen hidden" id="updates">
 
-  <div class="video-card">
-    <a href="https://www.youtube.com/watch?v=H6cNCTofnrs" target="_blank">
-      <img src="https://img.youtube.com/vi/H6cNCTofnrs/hqdefault.jpg">
-    </a>
-    <div class="caption">Christmas In Wizard City</div>
-  </div>
-
   <a
     href="https://wizard.printful.me/product/unisex-hoodie"
     target="_blank"
     class="merch-feature"
   >
-    <img src="hoodie-front.png" alt="Wizard Hoodie" class="merch-img">
-
+    <img src="hoodie-front.jpg" alt="Wizard Hoodie" class="merch-img">
     <div class="merch-title">WIZARD HOODIE</div>
-
-    <div class="merch-desc">
-      Arcane-weight fleece.<br>
-      Fulfilled by Printful.
-    </div>
-
     <div class="btn">BUY NOW</div>
   </a>
-
-  <form action="https://formspree.io/f/mrelgwzp" method="POST">
-    <input id="emailInput" type="email" name="email" placeholder="EMAIL FOR UPDATES" required>
-    <button class="btn" type="submit">SUBMIT</button>
-  </form>
 
   <button class="btn" id="backBtn">BACK</button>
 </div>
@@ -269,10 +210,8 @@ const updates = document.getElementById("updates");
 const enterBtn = document.getElementById("enterBtn");
 const backBtn = document.getElementById("backBtn");
 const cryptoField = document.getElementById("cryptoField");
-const emailInput = document.getElementById("emailInput");
 const logo = document.getElementById("logo");
 
-/* Mouse effects ONLY on desktop */
 if (!isMobile) {
   document.addEventListener("mousemove", e => {
     document.body.style.setProperty("--mx", e.clientX + "px");
@@ -288,7 +227,6 @@ if (!isMobile) {
   });
 }
 
-/* Page switching */
 enterBtn.onclick = () => {
   home.classList.add("hidden");
   updates.classList.remove("hidden");
@@ -298,30 +236,6 @@ backBtn.onclick = () => {
   home.classList.remove("hidden");
   cryptoField.innerHTML = "";
 };
-
-/* SAFE LETTER SPAWN */
-emailInput.addEventListener("keydown", e => {
-  if (e.key.length !== 1 || !/[a-zA-Z@._-]/.test(e.key)) return;
-  if (cryptoField.children.length > 18) return;
-
-  const count = Math.min(
-    parseInt(getComputedStyle(document.body).getPropertyValue("--letter-max")),
-    3
-  );
-
-  for (let i = 0; i < count; i++) {
-    const el = document.createElement("div");
-    el.className = "crypto";
-    el.textContent = e.key.toUpperCase();
-    el.style.left = Math.random() * 100 + "vw";
-    el.style.top = Math.random() * 100 + "vh";
-    el.style.fontSize =
-      Math.random() * parseFloat(getComputedStyle(document.body).getPropertyValue("--letter-size")) + "vw";
-    el.style.transform = `rotate(${Math.random() < 0.3 ? 180 : Math.random() * 360}deg)`;
-    cryptoField.appendChild(el);
-    setTimeout(() => el.remove(), parseInt(getComputedStyle(document.body).getPropertyValue("--letter-life")));
-  }
-});
 </script>
 
 </body>
