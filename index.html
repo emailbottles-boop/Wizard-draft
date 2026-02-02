@@ -128,13 +128,14 @@ body::before {
 
 .btn:hover { transform: scale(1.06); }
 
-/* ===== DONATE ===== */
+/* ===== GLOBAL DONATE ===== */
 .donate-wrap {
-  position: absolute;
+  position: fixed;
   bottom: 32px;
   width: 100%;
   display: flex;
   justify-content: center;
+  z-index: 6;
 }
 
 .donate-btn {
@@ -226,17 +227,18 @@ form input {
 <div class="edge"></div>
 <div id="cryptoField"></div>
 
+<!-- GLOBAL DONATE -->
+<div class="donate-wrap">
+  <a class="donate-btn" href="https://donorbox.org/wiz-rd-shit?" target="_blank">
+    <img src="https://donorbox.org/images/white_logo.svg" height="14"> DONATE
+  </a>
+</div>
+
 <!-- HOME -->
 <div class="screen active" id="home">
   <div class="home-stack">
     <img src="wizshtlogo_trans.png" class="logo" id="logo">
     <button class="btn" id="enterBtn">ENTER</button>
-  </div>
-
-  <div class="donate-wrap">
-    <a class="donate-btn" href="https://donorbox.org/wiz-rd-shit?" target="_blank">
-      <img src="https://donorbox.org/images/white_logo.svg" height="14"> DONATE
-    </a>
   </div>
 </div>
 
@@ -285,16 +287,17 @@ const cryptoField = document.getElementById("cryptoField");
 const emailInput = document.getElementById("emailInput");
 const logo = document.getElementById("logo");
 
-/* ===== LOGO + BG REACTIVITY (RESTORED) ===== */
+/* ===== LOGO + BG REACTIVITY ===== */
 if (!isMobile) {
   document.addEventListener("mousemove", e => {
     document.body.style.setProperty("--mx", e.clientX + "px");
     document.body.style.setProperty("--my", e.clientY + "px");
 
     const r = logo.getBoundingClientRect();
-    const dx = e.clientX - (r.left + r.width / 2);
-    const dy = e.clientY - (r.top + r.height / 2);
-    const d = Math.hypot(dx, dy);
+    const d = Math.hypot(
+      e.clientX - (r.left + r.width / 2),
+      e.clientY - (r.top + r.height / 2)
+    );
 
     const influence = Math.max(0, 1 - d / 320);
     logo.style.transform = `scale(${1 + influence * 0.3})`;
@@ -332,3 +335,4 @@ emailInput.addEventListener("keydown", e => {
 </script>
 </body>
 </html>
+
