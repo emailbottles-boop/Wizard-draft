@@ -8,16 +8,11 @@
 <style>
 html, body {
   margin: 0;
-  min-height: 100%;
-  overflow-x: hidden;
+  height: 100%;
+  overflow: hidden;
   background: #07000f;
   font-family: system-ui, sans-serif;
   color: white;
-}
-
-body {
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: contain;
 }
 
 a { text-decoration: none; color: inherit; }
@@ -25,10 +20,14 @@ a { text-decoration: none; color: inherit; }
 /* ===== DEVICE MODES ===== */
 body.mobile {
   --bg-strength: 0.02;
+  --letter-max: 4;
+  --letter-size: 16vw;
   --letter-life: 4200ms;
 }
 body.desktop {
   --bg-strength: 0.07;
+  --letter-max: 7;
+  --letter-size: 32vw;
   --letter-life: 9000ms;
 }
 
@@ -89,9 +88,29 @@ body::before {
   display: flex;
   justify-content: center;
   align-items: center;
-  will-change: opacity, transform, filter;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px) scale(0.98);
+  transition:
+    opacity 700ms ease,
+    transform 700ms cubic-bezier(.2,.7,.2,1),
+    filter 700ms ease;
 }
-.hidden { display: none; }
+
+.screen.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+/* subtle trippy fade */
+.screen.fade-out {
+  filter: blur(10px) saturate(160%);
+}
+.screen.fade-in {
+  filter: blur(0) saturate(120%);
+}
 
 /* ===== HOME ===== */
 .home-stack {
@@ -139,6 +158,7 @@ body::before {
   gap: 3rem;
 }
 
+/* ===== CENTER ===== */
 .center-col {
   display: flex;
   flex-direction: column;
@@ -164,25 +184,22 @@ body::before {
   border-radius: 18px;
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(8px);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .merch-feature:hover {
   transform: translateY(-6px) scale(1.03);
 }
-
 .merch-img {
   width: 100%;
   border-radius: 14px;
   margin-bottom: 1.2rem;
 }
-
 .merch-title {
   font-weight: 900;
   letter-spacing: 0.15em;
   margin-bottom: 1rem;
   text-align: center;
 }
-
 .buy-btn {
   padding: 0.9rem 2.2rem;
   border-radius: 999px;
@@ -194,40 +211,45 @@ body::before {
   text-align: center;
 }
 
+/* ===== FORM (FIXED) ===== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+form input {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 260px;
+  padding: 0.95rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(200,120,255,0.7);
+  background: rgba(0,0,0,0.45);
+  color: white;
+
+  text-align: center;
+  letter-spacing: 0.18em;
+  font-size: 0.7rem;
+
+  box-shadow:
+    inset 0 0 25px rgba(180,80,255,0.25),
+    0 0 25px rgba(180,80,255,0.25);
+
+  outline: none;
+}
+
+form input::placeholder {
+  color: rgba(220,180,255,0.6);
+}
+
 /* ===== MOBILE ===== */
 @media (max-width: 900px) {
   .updates-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
-  }
-}
-
-/* ===== SUBTLE TRIP TRANSITION ===== */
-.screen.fade-out {
-  animation: fadeOut 700ms ease forwards;
-}
-.screen.fade-in {
-  animation: fadeIn 900ms ease forwards;
-}
-
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-    transform: translateY(-12px) scale(0.98);
-    filter: blur(6px) saturate(80%);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(16px) scale(1.02);
-    filter: blur(8px) saturate(140%);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-    filter: none;
   }
 }
 </style>
@@ -237,15 +259,16 @@ body::before {
 <div class="edge"></div>
 <div id="cryptoField"></div>
 
-<div class="screen" id="home">
+<div class="screen active" id="home">
   <div class="home-stack">
     <img src="wizshtlogo_trans.png" class="logo" id="logo">
     <button class="btn" id="enterBtn">ENTER</button>
   </div>
 </div>
 
-<div class="screen hidden" id="updates">
+<div class="screen" id="updates">
   <div class="updates-grid">
+
     <a class="merch-feature" href="https://wizard.printful.me/product/unisex-hoodie" target="_blank">
       <img src="hoodie-front.png" class="merch-img">
       <div class="merch-title">WIZARD HOODIE</div>
@@ -273,13 +296,13 @@ body::before {
       <div class="merch-title">WIZARD HOODIE II</div>
       <div class="buy-btn">BUY NOW</div>
     </a>
+
   </div>
 </div>
 
 <script>
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 document.body.classList.add(isMobile ? "mobile" : "desktop");
-if (!isMobile) document.body.style.overflow = "hidden";
 
 const home = document.getElementById("home");
 const updates = document.getElementById("updates");
@@ -288,30 +311,6 @@ const backBtn = document.getElementById("backBtn");
 const cryptoField = document.getElementById("cryptoField");
 const emailInput = document.getElementById("emailInput");
 const logo = document.getElementById("logo");
-
-let transitioning = false;
-
-function transition(from, to) {
-  if (transitioning) return;
-  transitioning = true;
-
-  from.classList.add("fade-out");
-  to.classList.remove("hidden");
-  to.classList.add("fade-in");
-
-  setTimeout(() => {
-    from.classList.remove("fade-out");
-    from.classList.add("hidden");
-    to.classList.remove("fade-in");
-    transitioning = false;
-  }, 900);
-}
-
-enterBtn.onclick = () => transition(home, updates);
-backBtn.onclick = () => {
-  transition(updates, home);
-  cryptoField.innerHTML = "";
-};
 
 if (!isMobile) {
   document.addEventListener("mousemove", e => {
@@ -323,6 +322,24 @@ if (!isMobile) {
     logo.style.transform = `scale(${1 + i * 0.3})`;
   });
 }
+
+function swapScreens(from, to) {
+  from.classList.remove("active");
+  from.classList.add("fade-out");
+
+  to.classList.add("active", "fade-in");
+
+  setTimeout(() => {
+    from.classList.remove("fade-out");
+    to.classList.remove("fade-in");
+  }, 700);
+}
+
+enterBtn.onclick = () => swapScreens(home, updates);
+backBtn.onclick = () => {
+  swapScreens(updates, home);
+  cryptoField.innerHTML = "";
+};
 
 emailInput.addEventListener("keydown", e => {
   if (e.key.length !== 1 || !/[a-zA-Z@._-]/.test(e.key)) return;
