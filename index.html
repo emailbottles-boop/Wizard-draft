@@ -3,31 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Wizard</title>
-
-<!-- ===== FAVICONS (CHROME / EDGE / SAFARI / iOS) ===== -->
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
-<link rel="apple-touch-icon" href="/favicon-512.png">
-<meta name="theme-color" content="#07000f">
-
-<!-- ===== SOCIAL / SEARCH PREVIEW ===== -->
-<meta property="og:title" content="Wizard">
-<meta property="og:description" content="Enter Wizard City. Music, merch, and magic.">
-<meta property="og:image" content="https://wizardshit.store/thumbnail.png">
-<meta property="og:url" content="https://wizardshit.store">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
 
 <style>
 html, body {
   margin: 0;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
+  overflow-x: hidden;
   background: #07000f;
   font-family: system-ui, sans-serif;
   color: white;
+}
+
+body {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
 }
 
 a { text-decoration: none; color: inherit; }
@@ -35,10 +25,14 @@ a { text-decoration: none; color: inherit; }
 /* ===== DEVICE MODES ===== */
 body.mobile {
   --bg-strength: 0.02;
+  --letter-max: 4;
+  --letter-size: 16vw;
   --letter-life: 4200ms;
 }
 body.desktop {
   --bg-strength: 0.07;
+  --letter-max: 7;
+  --letter-size: 32vw;
   --letter-life: 9000ms;
 }
 
@@ -137,6 +131,7 @@ body::before {
   transform: scale(1.06);
   box-shadow: 0 0 35px rgba(255,220,120,0.8);
 }
+.btn:active { transform: scale(0.96); }
 
 /* ===== UPDATES GRID ===== */
 .updates-grid {
@@ -175,12 +170,10 @@ body::before {
   backdrop-filter: blur(8px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .merch-feature:hover {
   transform: translateY(-6px) scale(1.03);
 }
-
-.glow-gold { box-shadow: 0 0 45px rgba(255,220,120,0.45); }
-.glow-violet { box-shadow: 0 0 45px rgba(200,120,255,0.45); }
 
 .merch-img {
   width: 100%;
@@ -191,15 +184,42 @@ body::before {
 .merch-title {
   font-weight: 900;
   letter-spacing: 0.15em;
+  margin-bottom: 1rem;
   text-align: center;
 }
 
 .buy-btn {
-  margin-top: 1rem;
-  text-align: center;
-  font-size: 0.7rem;
+  padding: 0.9rem 2.2rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffe066, #b000ff);
+  color: black;
   font-weight: 900;
   letter-spacing: 0.3em;
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+/* ===== GLOW VARIANTS ===== */
+.glow-gold {
+  box-shadow:
+    0 0 45px rgba(255,220,120,0.45),
+    inset 0 0 22px rgba(255,220,120,0.25);
+}
+.glow-gold:hover {
+  box-shadow:
+    0 0 80px rgba(255,220,120,0.85),
+    inset 0 0 28px rgba(255,220,120,0.35);
+}
+
+.glow-violet {
+  box-shadow:
+    0 0 45px rgba(180,80,255,0.45),
+    inset 0 0 22px rgba(180,80,255,0.25);
+}
+.glow-violet:hover {
+  box-shadow:
+    0 0 80px rgba(200,120,255,0.85),
+    inset 0 0 28px rgba(200,120,255,0.35);
 }
 
 /* ===== FORM ===== */
@@ -277,6 +297,8 @@ form input {
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 document.body.classList.add(isMobile ? "mobile" : "desktop");
 
+if (!isMobile) document.body.style.overflow = "hidden";
+
 const home = document.getElementById("home");
 const updates = document.getElementById("updates");
 const enterBtn = document.getElementById("enterBtn");
@@ -296,16 +318,43 @@ if (!isMobile) {
   });
 }
 
-enterBtn.onclick = () => {
-  home.classList.add("hidden");
-  updates.classList.remove("hidden");
-};
-
-backBtn.onclick = () => {
+function goHome() {
   updates.classList.add("hidden");
   home.classList.remove("hidden");
   cryptoField.innerHTML = "";
-};
+}
+
+function goUpdates() {
+  home.classList.add("hidden");
+  updates.classList.remove("hidden");
+}
+
+enterBtn.onclick = goUpdates;
+backBtn.onclick = goHome;
+
+/* ===== MOBILE SWIPE NAV ===== */
+let startY = 0;
+let startTime = 0;
+
+document.addEventListener("touchstart", e => {
+  startY = e.touches[0].clientY;
+  startTime = Date.now();
+}, { passive: true });
+
+document.addEventListener("touchend", e => {
+  const endY = e.changedTouches[0].clientY;
+  const deltaY = endY - startY;
+  const duration = Date.now() - startTime;
+
+  if (Math.abs(deltaY) > 80 && duration < 600) {
+    if (deltaY < 0 && !home.classList.contains("hidden")) {
+      goUpdates(); // swipe up
+    }
+    if (deltaY > 0 && !updates.classList.contains("hidden")) {
+      goHome(); // swipe down
+    }
+  }
+}, { passive: true });
 
 emailInput.addEventListener("keydown", e => {
   if (e.key.length !== 1 || !/[a-zA-Z@._-]/.test(e.key)) return;
@@ -323,6 +372,5 @@ emailInput.addEventListener("keydown", e => {
   }
 });
 </script>
-
 </body>
 </html>
