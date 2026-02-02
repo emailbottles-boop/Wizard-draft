@@ -15,6 +15,12 @@ html, body {
   color: white;
 }
 
+/* Remove default link styling */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 /* ===== DEVICE MODES ===== */
 body.mobile {
   --bg-strength: 0.02;
@@ -87,7 +93,7 @@ body::before {
 
 @keyframes drift {
   from {
-    transform: translateY(40px) scale(1);
+    transform: translateY(40px);
     opacity: 1;
   }
   to {
@@ -130,10 +136,21 @@ body::before {
   font-weight: 900;
   letter-spacing: 0.35em;
   cursor: pointer;
-  text-decoration: none;
 }
 
-/* ===== MERCH FEATURE ===== */
+/* ===== VIDEO ===== */
+.video-card img {
+  width: 260px;
+  border-radius: 14px;
+}
+
+.caption {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+}
+
+/* ===== MERCH ===== */
 .merch-feature {
   max-width: 320px;
   padding: 1.5rem;
@@ -170,8 +187,25 @@ body::before {
   font-weight: 900;
   letter-spacing: 0.3em;
   font-size: 0.75rem;
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.2rem;
   color: #fff2a8;
+}
+
+/* ===== EMAIL ===== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+form input {
+  width: 250px;
+  padding: 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(200,120,255,0.6);
+  background: rgba(0,0,0,0.45);
+  color: white;
+  text-align: center;
 }
 </style>
 </head>
@@ -188,15 +222,27 @@ body::before {
 
 <div class="screen hidden" id="updates">
 
+  <div class="video-card">
+    <a href="https://www.youtube.com/watch?v=H6cNCTofnrs" target="_blank">
+      <img src="https://img.youtube.com/vi/H6cNCTofnrs/hqdefault.jpg">
+    </a>
+    <div class="caption">Christmas In Wizard City</div>
+  </div>
+
   <a
     href="https://wizard.printful.me/product/unisex-hoodie"
     target="_blank"
     class="merch-feature"
   >
-    <img src="hoodie-front.jpg" alt="Wizard Hoodie" class="merch-img">
+    <img src="hoodie-front.png" alt="Wizard Hoodie" class="merch-img">
     <div class="merch-title">WIZARD HOODIE</div>
     <div class="btn">BUY NOW</div>
   </a>
+
+  <form action="https://formspree.io/f/mrelgwzp" method="POST">
+    <input id="emailInput" type="email" name="email" placeholder="EMAIL FOR UPDATES" required>
+    <button class="btn" type="submit">SUBMIT</button>
+  </form>
 
   <button class="btn" id="backBtn">BACK</button>
 </div>
@@ -210,8 +256,10 @@ const updates = document.getElementById("updates");
 const enterBtn = document.getElementById("enterBtn");
 const backBtn = document.getElementById("backBtn");
 const cryptoField = document.getElementById("cryptoField");
+const emailInput = document.getElementById("emailInput");
 const logo = document.getElementById("logo");
 
+/* Mouse effects */
 if (!isMobile) {
   document.addEventListener("mousemove", e => {
     document.body.style.setProperty("--mx", e.clientX + "px");
@@ -227,6 +275,7 @@ if (!isMobile) {
   });
 }
 
+/* Page switching */
 enterBtn.onclick = () => {
   home.classList.add("hidden");
   updates.classList.remove("hidden");
@@ -236,6 +285,24 @@ backBtn.onclick = () => {
   home.classList.remove("hidden");
   cryptoField.innerHTML = "";
 };
+
+/* Cryptic letters */
+emailInput.addEventListener("keydown", e => {
+  if (e.key.length !== 1 || !/[a-zA-Z@._-]/.test(e.key)) return;
+  if (cryptoField.children.length > 18) return;
+
+  for (let i = 0; i < 3; i++) {
+    const el = document.createElement("div");
+    el.className = "crypto";
+    el.textContent = e.key.toUpperCase();
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.top = Math.random() * 100 + "vh";
+    el.style.fontSize = Math.random() * 18 + 6 + "vw";
+    el.style.transform = `rotate(${Math.random() * 360}deg)`;
+    cryptoField.appendChild(el);
+    setTimeout(() => el.remove(), 6000);
+  }
+});
 </script>
 
 </body>
