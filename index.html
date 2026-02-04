@@ -180,6 +180,7 @@ body::before {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  padding: 0.5rem 0;
 }
 
 .nav-buttons-wrapper::-webkit-scrollbar {
@@ -189,7 +190,7 @@ body::before {
 .nav-buttons {
   display: flex;
   gap: 1.5rem;
-  padding: 1rem 0;
+  padding: 1.5rem 0.5rem;
   min-width: min-content;
 }
 
@@ -234,6 +235,7 @@ body::before {
   display: flex;
   justify-content: center;
   z-index: 6;
+  padding: 0.5rem;
 }
 
 .donate-btn {
@@ -302,6 +304,7 @@ body::before {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   width: 100%;
+  padding: 1rem;
 }
 
 .video-card {
@@ -310,14 +313,21 @@ body::before {
   gap: 1rem;
 }
 
+.video-card a {
+  display: block;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
 .video-card img {
   width: 100%;
   border-radius: 14px;
   transition: transform 0.3s ease;
+  display: block;
 }
 
 .video-card img:hover {
-  transform: scale(1.02);
+  transform: scale(1.05);
 }
 
 .caption {
@@ -462,7 +472,12 @@ form input {
         </a>
         <div class="caption">Christmas In Wizard City</div>
       </div>
-      <!-- Add more videos here -->
+      <div class="video-card">
+        <a href="https://www.youtube.com/watch?v=A2TZgaXa49w" target="_blank">
+          <img src="https://img.youtube.com/vi/A2TZgaXa49w/hqdefault.jpg">
+        </a>
+        <div class="caption">Wizard Video</div>
+      </div>
     </div>
     <button class="btn back-to-nav">BACK</button>
   </div>
