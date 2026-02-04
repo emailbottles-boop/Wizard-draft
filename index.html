@@ -175,12 +175,14 @@ body::before {
 
 .nav-buttons-wrapper {
   width: 100%;
+  display: flex;
+  justify-content: center;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: visible;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  padding: 1rem;
+  padding: 2rem 1rem;
 }
 
 .nav-buttons-wrapper::-webkit-scrollbar {
@@ -190,22 +192,23 @@ body::before {
 .nav-buttons {
   display: flex;
   gap: 1.5rem;
-  padding: 1rem;
-  min-width: min-content;
+  padding: 0;
+  flex-wrap: wrap;
   justify-content: center;
+  max-width: 100%;
 }
 
 .nav-btn {
   flex-shrink: 0;
-  width: 180px;
-  height: 180px;
+  width: 220px;
+  height: 220px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, rgba(255,224,102,0.2), rgba(176,0,255,0.2));
   border: 2px solid rgba(200,120,255,0.5);
   border-radius: 20px;
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   font-weight: 900;
   letter-spacing: 0.3em;
   cursor: pointer;
@@ -339,11 +342,9 @@ body::before {
 
 /* ===== CREDITS ===== */
 .credits-content {
-  max-width: 600px;
+  max-width: 1200px;
+  width: 100%;
   padding: 2rem;
-  border-radius: 18px;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(10px);
 }
 
 .credits-title {
@@ -351,26 +352,48 @@ body::before {
   font-weight: 900;
   letter-spacing: 0.2em;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
-.credits-section {
-  margin-bottom: 2rem;
+.credits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
 }
 
-.credits-section h3 {
-  font-size: 0.9rem;
+.credit-box {
+  padding: 1.5rem;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(200,120,255,0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-align: center;
+}
+
+.credit-box:hover {
+  transform: translateY(-5px);
+  background: rgba(255,224,102,0.15);
+  border-color: rgba(255,220,120,0.8);
+  box-shadow: 0 10px 30px rgba(180,0,255,0.3);
+}
+
+.credit-role {
+  font-size: 0.65rem;
   letter-spacing: 0.25em;
   font-weight: 900;
   margin-bottom: 0.8rem;
   color: rgba(255,220,120,0.9);
+  text-transform: uppercase;
 }
 
-.credits-section p {
-  font-size: 0.8rem;
+.credit-name {
+  font-size: 1rem;
   letter-spacing: 0.1em;
-  line-height: 1.6;
-  opacity: 0.85;
+  line-height: 1.4;
+  font-weight: 700;
 }
 
 /* ===== FORM ===== */
@@ -448,7 +471,6 @@ form input {
         <div class="nav-btn" data-target="videos">VIDEOS</div>
         <div class="nav-btn" data-target="merch">MERCH</div>
         <div class="nav-btn" data-target="credits">CREDITS</div>
-        <div class="nav-btn" data-target="updates">UPDATES</div>
       </div>
     </div>
     
@@ -508,38 +530,107 @@ form input {
     <div class="credits-content">
       <div class="credits-title">CREDITS</div>
       
-      <div class="credits-section">
-        <h3>CREATED BY</h3>
-        <p>Wizard Team</p>
+      <div class="credits-grid">
+        <div class="credit-box">
+          <div class="credit-role">Creator</div>
+          <div class="credit-name">Wizard Master</div>
+        </div>
+        
+        <div class="credit-box">
+          <div class="credit-role">Lead Producer</div>
+          <div class="credit-name">Magic Mike</div>
+        </div>
+        
+        <div class="credit-box">
+          <div class="credit-role">Sound Engineer</div>
+          <div class="credit-name">Echo Chambers</div>
+        </div>
+        
+        <div class="credit-box">
+          <div class="credit-role">Visual Director</div>
+          <div class="credit-name">Crystal Vision</div>
+        </div>
+        
+        <div class="credit-box">
+          <div class="credit-role">Lead Vocals</div>
+          <div class="credit-name">Spell Singer</div>
+        </div>
+        
+        <div class="credit-box">
+          <div class="credit-role">Guitar</div>
+          <div class="credit-name">Riff Wizard</div>
+        </div>
+        
+        <div class="credit-box">
+          <div class="credit-role">Drums</div>
+          <div class="credit-name">Thunder Beats</div>
+        </div>
+        
+        <div class="credit-box">
+          <div class="credit-role">Bass</div>
+          <div class="credit-name">Low Frequency</div>
+        </div>
+        
+        <div class="credit-box">
+          <div class="credit-role">Synth</div>
+          <div class="credit-name">Wave Maker</div>
+        </div>
+        
+        <div class="credit-box">
+          <div class="credit-role">Video Editor</div>
+          <div class="credit-name">Frame Perfect</div>
+        </div>
+        
+        <div class="credit-box">
+          <div class="credit-role">Cinematographer</div>
+          <div class="credit-name">Lens Master</div>
+        </div>
+        
+        <div class="credit-box">
+          <div class="credit-role">Graphic Design</div>
+          <div class="credit-name">Pixel Wizard</div>
+        </div>
+        
+        <div class="credit-box">
+          <div class="credit-role">Web Developer</div>
+          <div class="credit-name">Code Sorcerer</div>
+        </div>
+        
+        <div class="credit-box">
+          <div class="credit-role">Manager</div>
+          <div class="credit-name">Boss Wizard</div>
+        </div>
+        
+        <div class="credit-box">
+          <div class="credit-role">Marketing</div>
+          <div class="credit-name">Hype Mage</div>
+        </div>
+        
+        <div class="credit-box">
+          <div class="credit-role">Stylist</div>
+          <div class="credit-name">Fashion Spell</div>
+        </div>
+        
+        <div class="credit-box">
+          <div class="credit-role">Choreographer</div>
+          <div class="credit-name">Move Master</div>
+        </div>
+        
+        <div class="credit-box">
+          <div class="credit-role">Mix Engineer</div>
+          <div class="credit-name">Audio Alchemist</div>
+        </div>
+        
+        <div class="credit-box">
+          <div class="credit-role">Mastering</div>
+          <div class="credit-name">Final Touch</div>
+        </div>
+        
+        <div class="credit-box">
+          <div class="credit-role">Special Thanks</div>
+          <div class="credit-name">The Fans</div>
+        </div>
       </div>
-      
-      <div class="credits-section">
-        <h3>MUSIC & PRODUCTION</h3>
-        <p>Add your credits here</p>
-      </div>
-      
-      <div class="credits-section">
-        <h3>DESIGN & DEVELOPMENT</h3>
-        <p>Add your credits here</p>
-      </div>
-      
-      <div class="credits-section">
-        <h3>SPECIAL THANKS</h3>
-        <p>Add your thanks here</p>
-      </div>
-    </div>
-    <button class="btn back-to-nav">BACK</button>
-  </div>
-</div>
-
-<!-- UPDATES SCREEN (original page) -->
-<div class="screen" id="updates">
-  <div class="content-page">
-    <div class="video-card">
-      <a href="https://www.youtube.com/watch?v=H6cNCTofnrs" target="_blank">
-        <img src="https://img.youtube.com/vi/H6cNCTofnrs/hqdefault.jpg" style="max-width: 400px;">
-      </a>
-      <div class="caption">Christmas In Wizard City</div>
     </div>
     <button class="btn back-to-nav">BACK</button>
   </div>
