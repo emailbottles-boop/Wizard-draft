@@ -157,79 +157,9 @@ body::before {
   font-weight: 900;
   letter-spacing: 0.35em;
   cursor: pointer;
-  transition: transform 0.2s ease;
 }
 
 .btn:hover { transform: scale(1.06); }
-
-/* ===== NAV PAGE ===== */
-.nav-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3rem;
-  width: 100%;
-  max-width: 900px;
-  padding: 2rem;
-}
-
-.nav-buttons-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  overflow-x: auto;
-  overflow-y: visible;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  padding: 2rem 1rem;
-}
-
-.nav-buttons-wrapper::-webkit-scrollbar {
-  display: none;
-}
-
-.nav-buttons {
-  display: flex;
-  gap: 1.5rem;
-  padding: 0;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 100%;
-}
-
-.nav-btn {
-  flex-shrink: 0;
-  width: 220px;
-  height: 220px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, rgba(255,224,102,0.2), rgba(176,0,255,0.2));
-  border: 2px solid rgba(200,120,255,0.5);
-  border-radius: 20px;
-  font-size: 1.1rem;
-  font-weight: 900;
-  letter-spacing: 0.3em;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  text-align: center;
-}
-
-.nav-btn:hover {
-  transform: scale(1.05);
-  background: linear-gradient(135deg, rgba(255,224,102,0.3), rgba(176,0,255,0.3));
-  border-color: rgba(255,220,120,0.8);
-}
-
-.nav-bottom {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  width: 100%;
-}
 
 /* ===== DONATE ===== */
 .donate-wrap {
@@ -239,7 +169,6 @@ body::before {
   display: flex;
   justify-content: center;
   z-index: 6;
-  padding: 0.5rem;
 }
 
 .donate-btn {
@@ -254,40 +183,41 @@ body::before {
   font-size: 0.65rem;
   letter-spacing: 0.25em;
   font-weight: 800;
-  transition: transform 0.2s ease;
 }
 
-.donate-btn:hover {
-  transform: scale(1.05);
-}
-
-/* ===== CONTENT PAGES ===== */
-.content-page {
+/* ===== UPDATES GRID ===== */
+.updates-grid {
   width: min(1200px, 92vw);
+  display: grid;
+  grid-template-columns: 320px auto 320px;
+  align-items: center;
+  gap: 3rem;
+}
+
+.center-col {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2.5rem;
-  padding: 2rem 0;
+  gap: 2.2rem;
 }
 
-/* ===== MERCH GRID ===== */
-.merch-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  width: 100%;
+/* ===== VIDEO CARD ===== */
+.video-card img {
+  width: 260px;
+  border-radius: 14px;
 }
 
+.caption {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-align: center;
+}
+
+/* ===== MERCH ===== */
 .merch-feature {
   padding: 1.6rem;
   border-radius: 18px;
   background: rgba(255,255,255,0.08);
-  transition: transform 0.3s ease;
-}
-
-.merch-feature:hover {
-  transform: scale(1.02);
 }
 
 .merch-img {
@@ -302,111 +232,16 @@ body::before {
   letter-spacing: 0.15em;
 }
 
-/* ===== VIDEOS GRID ===== */
-.videos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  width: 100%;
-  padding: 1rem;
-}
-
-.video-card {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.video-card a {
-  display: block;
-  overflow: hidden;
-  border-radius: 14px;
-}
-
-.video-card img {
-  width: 100%;
-  border-radius: 14px;
-  transition: transform 0.3s ease;
-  display: block;
-}
-
-.video-card img:hover {
-  transform: scale(1.05);
-}
-
-.caption {
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  text-align: center;
-}
-
-/* ===== CREDITS ===== */
-.credits-content {
-  max-width: 1200px;
-  width: 100%;
-  padding: 2rem;
-}
-
-.credits-title {
-  font-size: 1.5rem;
-  font-weight: 900;
-  letter-spacing: 0.2em;
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.credits-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  width: 100%;
-}
-
-.credit-box {
-  padding: 1.5rem;
-  border-radius: 18px;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(200,120,255,0.3);
-  transition: all 0.3s ease;
-  cursor: pointer;
-  text-align: center;
-}
-
-.credit-box:hover {
-  transform: translateY(-5px);
-  background: rgba(255,224,102,0.15);
-  border-color: rgba(255,220,120,0.8);
-  box-shadow: 0 10px 30px rgba(180,0,255,0.3);
-}
-
-.credit-role {
-  font-size: 0.65rem;
-  letter-spacing: 0.25em;
-  font-weight: 900;
-  margin-bottom: 0.8rem;
-  color: rgba(255,220,120,0.9);
-  text-transform: uppercase;
-}
-
-.credit-name {
-  font-size: 1rem;
-  letter-spacing: 0.1em;
-  line-height: 1.4;
-  font-weight: 700;
-}
-
 /* ===== FORM ===== */
 form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   align-items: center;
-  width: 100%;
 }
 
 form input {
-  width: min(320px, 100%);
+  width: 260px;
   padding: 0.9rem;
   border-radius: 999px;
   border: 1px solid rgba(200,120,255,0.7);
@@ -427,15 +262,7 @@ form input {
   body { overflow-y: auto; }
   .screen { position: relative; min-height: 100vh; opacity: 1 !important; transform: none !important; }
   .screen:not(.active) { display: none; }
-  
-  .nav-buttons {
-    justify-content: flex-start;
-  }
-  
-  .merch-grid,
-  .videos-grid {
-    grid-template-columns: 1fr;
-  }
+  .updates-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -455,7 +282,6 @@ form input {
   </a>
 </div>
 
-<!-- HOME SCREEN -->
 <div class="screen active" id="home">
   <div class="home-stack">
     <img src="wizshtlogo_trans.png" class="logo" id="logo">
@@ -463,176 +289,37 @@ form input {
   </div>
 </div>
 
-<!-- NAVIGATION SCREEN -->
-<div class="screen" id="navigation">
-  <div class="nav-container">
-    <div class="nav-buttons-wrapper">
-      <div class="nav-buttons">
-        <div class="nav-btn" data-target="videos">VIDEOS</div>
-        <div class="nav-btn" data-target="merch">MERCH</div>
-        <div class="nav-btn" data-target="credits">CREDITS</div>
-      </div>
-    </div>
-    
-    <div class="nav-bottom">
-      <form id="emailForm">
-        <input id="emailInput" type="email" name="email" placeholder="EMAIL FOR UPDATES" required>
-        <button class="btn" type="submit">SUBSCRIBE</button>
-      </form>
-      <div class="form-success" id="formSuccess">SUBSCRIBED ✨</div>
-      <button class="btn" id="backBtn">BACK</button>
-    </div>
-  </div>
-</div>
+<div class="screen" id="updates">
+  <div class="updates-grid">
 
-<!-- VIDEOS SCREEN -->
-<div class="screen" id="videos">
-  <div class="content-page">
-    <div class="videos-grid">
+    <a class="merch-feature" href="https://wizard.printful.me/product/unisex-hoodie" target="_blank">
+      <img src="hoodie-front.png" class="merch-img">
+      <div class="merch-title">WIZARD HOODIE</div>
+    </a>
+
+    <div class="center-col">
       <div class="video-card">
         <a href="https://www.youtube.com/watch?v=H6cNCTofnrs" target="_blank">
           <img src="https://img.youtube.com/vi/H6cNCTofnrs/hqdefault.jpg">
         </a>
         <div class="caption">Christmas In Wizard City</div>
       </div>
-      <div class="video-card">
-        <a href="https://www.youtube.com/watch?v=A2TZgaXa49w" target="_blank">
-          <img src="https://img.youtube.com/vi/A2TZgaXa49w/hqdefault.jpg">
-        </a>
-        <div class="caption">Wizard Video</div>
-      </div>
-    </div>
-    <button class="btn back-to-nav">BACK</button>
-  </div>
-</div>
 
-<!-- MERCH SCREEN -->
-<div class="screen" id="merch">
-  <div class="content-page">
-    <div class="merch-grid">
-      <a class="merch-feature" href="https://wizard.printful.me/product/unisex-hoodie" target="_blank">
-        <img src="hoodie-front.png" class="merch-img">
-        <div class="merch-title">WIZARD HOODIE</div>
-      </a>
-      
-      <a class="merch-feature" href="https://wizard.printful.me/product/hoodie" target="_blank">
-        <img src="hoodie-2.png" class="merch-img">
-        <div class="merch-title">WIZARD HOODIE II</div>
-      </a>
-    </div>
-    <button class="btn back-to-nav">BACK</button>
-  </div>
-</div>
+      <form id="emailForm">
+        <input id="emailInput" type="email" name="email" placeholder="EMAIL FOR UPDATES" required>
+        <button class="btn" type="submit">SUBMIT</button>
+      </form>
 
-<!-- CREDITS SCREEN -->
-<div class="screen" id="credits">
-  <div class="content-page">
-    <div class="credits-content">
-      <div class="credits-title">CREDITS</div>
-      
-      <div class="credits-grid">
-        <div class="credit-box">
-          <div class="credit-role"></div>
-          <div class="credit-name"></div>
-        </div>
-        
-        <div class="credit-box">
-          <div class="credit-role"></div>
-          <div class="credit-name"></div>
-        </div>
-        
-        <div class="credit-box">
-          <div class="credit-role"></div>
-          <div class="credit-name"></div>
-        </div>
-        
-        <div class="credit-box">
-          <div class="credit-role"></div>
-          <div class="credit-name"></div>
-        </div>
-        
-        <div class="credit-box">
-          <div class="credit-role"></div>
-          <div class="credit-name"></div>
-        </div>
-        
-        <div class="credit-box">
-          <div class="credit-role"></div>
-          <div class="credit-name"></div>
-        </div>
-        
-        <div class="credit-box">
-          <div class="credit-role"></div>
-          <div class="credit-name"></div>
-        </div>
-        
-        <div class="credit-box">
-          <div class="credit-role"></div>
-          <div class="credit-name"></div>
-        </div>
-        
-        <div class="credit-box">
-          <div class="credit-role"></div>
-          <div class="credit-name"></div>
-        </div>
-        
-        <div class="credit-box">
-          <div class="credit-role"></div>
-          <div class="credit-name"></div>
-        </div>
-        
-        <div class="credit-box">
-          <div class="credit-role"></div>
-          <div class="credit-name"></div>
-        </div>
-        
-        <div class="credit-box">
-          <div class="credit-role"></div>
-          <div class="credit-name"></div>
-        </div>
-        
-        <div class="credit-box">
-          <div class="credit-role"></div>
-          <div class="credit-name"></div>
-        </div>
-        
-        <div class="credit-box">
-          <div class="credit-role"></div>
-          <div class="credit-name"></div>
-        </div>
-        
-        <div class="credit-box">
-          <div class="credit-role"></div>
-          <div class="credit-name"></div>
-        </div>
-        
-        <div class="credit-box">
-          <div class="credit-role"></div>
-          <div class="credit-name"></div>
-        </div>
-        
-        <div class="credit-box">
-          <div class="credit-role"></div>
-          <div class="credit-name"></div>
-        </div>
-        
-        <div class="credit-box">
-          <div class="credit-role"></div>
-          <div class="credit-name"></div>
-        </div>
-        
-        <div class="credit-box">
-          <div class="credit-role"></div>
-          <div class="credit-name"></div>
-        </div>
-        
-        <div class="credit-box">
-          <div class="credit-role"></div>
-          <div class="credit-name"></div>
-        </div>
-      </div>
+      <div class="form-success" id="formSuccess">SUBSCRIBED ✨</div>
+
+      <button class="btn" id="backBtn">BACK</button>
     </div>
-    <button class="btn back-to-nav">BACK</button>
+
+    <a class="merch-feature" href="https://wizard.printful.me/product/hoodie" target="_blank">
+      <img src="hoodie-2.png" class="merch-img">
+      <div class="merch-title">WIZARD HOODIE II</div>
+    </a>
+
   </div>
 </div>
 
@@ -641,7 +328,7 @@ const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 document.body.classList.add(isMobile ? "mobile" : "desktop");
 
 const home = document.getElementById("home");
-const navigation = document.getElementById("navigation");
+const updates = document.getElementById("updates");
 const enterBtn = document.getElementById("enterBtn");
 const backBtn = document.getElementById("backBtn");
 const cryptoField = document.getElementById("cryptoField");
@@ -654,37 +341,18 @@ const successMsg = document.getElementById("formSuccess");
 
 waterVideo.playbackRate = 0.55;
 
-// Navigate from home to navigation
 enterBtn.onclick = () => {
   home.classList.remove("active");
-  navigation.classList.add("active");
+  updates.classList.add("active");
   waterLayer.style.opacity = 1;
 };
 
-// Back to home from navigation
 backBtn.onclick = () => {
-  navigation.classList.remove("active");
+  updates.classList.remove("active");
   home.classList.add("active");
   waterLayer.style.opacity = 0;
   cryptoField.innerHTML = "";
 };
-
-// Navigation buttons
-document.querySelectorAll('.nav-btn').forEach(btn => {
-  btn.onclick = () => {
-    const target = btn.getAttribute('data-target');
-    navigation.classList.remove("active");
-    document.getElementById(target).classList.add("active");
-  };
-});
-
-// Back to navigation from content pages
-document.querySelectorAll('.back-to-nav').forEach(btn => {
-  btn.onclick = () => {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    navigation.classList.add('active');
-  };
-});
 
 /* Formspree AJAX submit */
 form.addEventListener("submit", async e => {
@@ -723,3 +391,4 @@ emailInput.addEventListener("keydown", e => {
 
 </body>
 </html>
+
