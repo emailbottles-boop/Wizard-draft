@@ -157,9 +157,16 @@ body::before {
   font-weight: 900;
   letter-spacing: 0.35em;
   cursor: pointer;
+  transition: transform 0.15s ease;
 }
 
 .btn:hover { transform: scale(1.06); }
+
+.btn-secondary {
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border: 1px solid rgba(180,80,255,0.5);
+}
 
 /* ===== DONATE ===== */
 .donate-wrap {
@@ -183,7 +190,10 @@ body::before {
   font-size: 0.65rem;
   letter-spacing: 0.25em;
   font-weight: 800;
+  transition: transform 0.15s ease;
 }
+
+.donate-btn:hover { transform: scale(1.05); }
 
 /* ===== UPDATES GRID ===== */
 .updates-grid {
@@ -218,7 +228,10 @@ body::before {
   padding: 1.6rem;
   border-radius: 18px;
   background: rgba(255,255,255,0.08);
+  transition: transform 0.15s ease;
 }
+
+.merch-feature:hover { transform: scale(1.03); }
 
 .merch-img {
   width: 100%;
@@ -257,12 +270,90 @@ form input {
   opacity: 0.85;
 }
 
+/* ===== CREDITS PAGE ===== */
+.credits-container {
+  width: min(1100px, 92vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  padding: 2rem 0;
+}
+
+.credits-title {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 0.3em;
+  text-align: center;
+  background: linear-gradient(135deg, #ffe066, #b000ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 40px rgba(200,120,255,0.5);
+}
+
+.credits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 900px;
+}
+
+.bio-card {
+  aspect-ratio: 1;
+  padding: 1.5rem;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(180,80,255,0.3);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.bio-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255,220,120,0.6);
+  box-shadow: 0 10px 40px rgba(180,80,255,0.4);
+}
+
+.bio-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255,220,120,0.5);
+  box-shadow: 0 0 20px rgba(200,120,255,0.6);
+}
+
+.bio-name {
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.bio-role {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-align: center;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
 /* ===== MOBILE ===== */
 @media (max-width: 900px) {
   body { overflow-y: auto; }
   .screen { position: relative; min-height: 100vh; opacity: 1 !important; transform: none !important; }
   .screen:not(.active) { display: none; }
   .updates-grid { grid-template-columns: 1fr; }
+  .credits-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; }
+  .credits-title { font-size: 1.5rem; }
 }
 </style>
 </head>
@@ -312,7 +403,8 @@ form input {
 
       <div class="form-success" id="formSuccess">SUBSCRIBED ✨</div>
 
-      <button class="btn" id="backBtn">BACK</button>
+      <button class="btn" id="creditsBtn">CREDITS</button>
+      <button class="btn btn-secondary" id="backBtn">BACK</button>
     </div>
 
     <a class="merch-feature" href="https://wizard.printful.me/product/hoodie" target="_blank">
@@ -323,14 +415,44 @@ form input {
   </div>
 </div>
 
+<div class="screen" id="credits">
+  <div class="credits-container">
+    <div class="credits-title">CREDITS</div>
+    
+    <div class="credits-grid">
+      
+      <div class="bio-card">
+        <img src="Emmz.jpeg" alt="Emman Paraiso" class="bio-photo">
+        <div class="bio-name">Emman Paraiso</div>
+        <div class="bio-role">2D Animator<br>2D Clean & Colorist</div>
+      </div>
+
+      <!-- Add more bio cards here -->
+      <!-- Template:
+      <div class="bio-card">
+        <img src="photo-name.jpg" alt="Person Name" class="bio-photo">
+        <div class="bio-name">Person Name</div>
+        <div class="bio-role">Role 1<br>Role 2</div>
+      </div>
+      -->
+
+    </div>
+
+    <button class="btn btn-secondary" id="backToUpdatesBtn">BACK</button>
+  </div>
+</div>
+
 <script>
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 document.body.classList.add(isMobile ? "mobile" : "desktop");
 
 const home = document.getElementById("home");
 const updates = document.getElementById("updates");
+const credits = document.getElementById("credits");
 const enterBtn = document.getElementById("enterBtn");
 const backBtn = document.getElementById("backBtn");
+const creditsBtn = document.getElementById("creditsBtn");
+const backToUpdatesBtn = document.getElementById("backToUpdatesBtn");
 const cryptoField = document.getElementById("cryptoField");
 const emailInput = document.getElementById("emailInput");
 const logo = document.getElementById("logo");
@@ -352,6 +474,16 @@ backBtn.onclick = () => {
   home.classList.add("active");
   waterLayer.style.opacity = 0;
   cryptoField.innerHTML = "";
+};
+
+creditsBtn.onclick = () => {
+  updates.classList.remove("active");
+  credits.classList.add("active");
+};
+
+backToUpdatesBtn.onclick = () => {
+  credits.classList.remove("active");
+  updates.classList.add("active");
 };
 
 /* Formspree AJAX submit */
@@ -391,4 +523,3 @@ emailInput.addEventListener("keydown", e => {
 
 </body>
 </html>
-
