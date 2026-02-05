@@ -142,7 +142,12 @@ body::before {
   width: 340px;
   max-width: 85vw;
   filter: drop-shadow(0 0 70px rgba(200,120,255,0.9));
-  transition: transform 0.15s ease-out;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.logo:hover {
+  transform: scale(1.08);
 }
 
 /* ===== BUTTONS ===== */
@@ -157,10 +162,12 @@ body::before {
   font-weight: 900;
   letter-spacing: 0.35em;
   cursor: pointer;
-  transition: transform 0.15s ease;
+  transition: transform 0.3s ease;
 }
 
-.btn:hover { transform: scale(1.06); }
+.btn:hover { 
+  transform: scale(1.06); 
+}
 
 .btn-secondary {
   background: rgba(255,255,255,0.1);
@@ -190,48 +197,130 @@ body::before {
   font-size: 0.65rem;
   letter-spacing: 0.25em;
   font-weight: 800;
-  transition: transform 0.15s ease;
+  transition: transform 0.3s ease;
 }
 
-.donate-btn:hover { transform: scale(1.05); }
-
-/* ===== UPDATES GRID ===== */
-.updates-grid {
-  width: min(1200px, 92vw);
-  display: grid;
-  grid-template-columns: 320px auto 320px;
-  align-items: center;
-  gap: 3rem;
+.donate-btn:hover { 
+  transform: scale(1.06); 
 }
 
-.center-col {
+/* ===== NEW UPDATES LAYOUT ===== */
+.updates-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2.2rem;
+  gap: 3rem;
+  width: min(900px, 92vw);
 }
 
-/* ===== VIDEO CARD ===== */
-.video-card img {
-  width: 260px;
-  border-radius: 14px;
+.nav-boxes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  width: 100%;
 }
 
-.caption {
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
+.nav-box {
+  aspect-ratio: 1;
+  padding: 2rem;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.08);
+  border: 2px solid rgba(180,80,255,0.3);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  cursor: pointer;
+  transition: all 0.3s ease;
   text-align: center;
 }
 
-/* ===== MERCH ===== */
+.nav-box:hover {
+  transform: scale(1.05) translateY(-5px);
+  border-color: rgba(255,220,120,0.6);
+  box-shadow: 0 10px 50px rgba(180,80,255,0.5);
+  background: rgba(255,255,255,0.12);
+}
+
+.email-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* ===== FORM ===== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+form input {
+  width: 300px;
+  max-width: 85vw;
+  padding: 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(200,120,255,0.7);
+  background: rgba(0,0,0,0.45);
+  color: white;
+  text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.form-success {
+  display: none;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  opacity: 0.85;
+}
+
+/* ===== MERCH PAGE ===== */
+.merch-container {
+  width: min(1000px, 92vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  padding: 2rem 0;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 0.3em;
+  text-align: center;
+  background: linear-gradient(135deg, #ffe066, #b000ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.merch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  width: 100%;
+}
+
 .merch-feature {
   padding: 1.6rem;
   border-radius: 18px;
   background: rgba(255,255,255,0.08);
-  transition: transform 0.15s ease;
+  border: 1px solid rgba(180,80,255,0.3);
+  transition: all 0.3s ease;
 }
 
-.merch-feature:hover { transform: scale(1.03); }
+.merch-feature:hover { 
+  transform: scale(1.03) translateY(-5px);
+  border-color: rgba(255,220,120,0.6);
+  box-shadow: 0 10px 40px rgba(180,80,255,0.4);
+}
 
 .merch-img {
   width: 100%;
@@ -245,29 +334,36 @@ body::before {
   letter-spacing: 0.15em;
 }
 
-/* ===== FORM ===== */
-form {
+/* ===== CONTENT PAGE ===== */
+.content-container {
+  width: min(800px, 92vw);
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
   align-items: center;
+  gap: 3rem;
+  padding: 2rem 0;
 }
 
-form input {
-  width: 260px;
-  padding: 0.9rem;
-  border-radius: 999px;
-  border: 1px solid rgba(200,120,255,0.7);
-  background: rgba(0,0,0,0.45);
-  color: white;
-  text-align: center;
+.video-card {
+  width: 100%;
+  max-width: 500px;
 }
 
-.form-success {
-  display: none;
-  font-size: 0.7rem;
+.video-card img {
+  width: 100%;
+  border-radius: 14px;
+  transition: transform 0.3s ease;
+}
+
+.video-card:hover img {
+  transform: scale(1.03);
+}
+
+.caption {
+  font-size: 0.85rem;
   letter-spacing: 0.2em;
-  opacity: 0.85;
+  text-align: center;
+  margin-top: 1rem;
 }
 
 /* ===== CREDITS PAGE ===== */
@@ -278,18 +374,6 @@ form input {
   align-items: center;
   gap: 3rem;
   padding: 2rem 0;
-}
-
-.credits-title {
-  font-size: 2rem;
-  font-weight: 900;
-  letter-spacing: 0.3em;
-  text-align: center;
-  background: linear-gradient(135deg, #ffe066, #b000ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: 0 0 40px rgba(200,120,255,0.5);
 }
 
 .credits-grid {
@@ -305,7 +389,7 @@ form input {
   padding: 1.5rem;
   border-radius: 18px;
   background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(180,80,255,0.3);
+  border: 2px solid rgba(180,80,255,0.3);
   backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
@@ -316,9 +400,9 @@ form input {
 }
 
 .bio-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
   border-color: rgba(255,220,120,0.6);
-  box-shadow: 0 10px 40px rgba(180,80,255,0.4);
+  box-shadow: 0 10px 50px rgba(180,80,255,0.5);
 }
 
 .bio-photo {
@@ -327,7 +411,7 @@ form input {
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid rgba(255,220,120,0.5);
-  box-shadow: 0 0 20px rgba(200,120,255,0.6);
+  box-shadow: 0 0 25px rgba(200,120,255,0.7);
 }
 
 .bio-name {
@@ -342,18 +426,38 @@ form input {
   font-size: 0.65rem;
   letter-spacing: 0.1em;
   text-align: center;
-  opacity: 0.8;
-  line-height: 1.4;
+  opacity: 0.85;
+  line-height: 1.5;
 }
 
 /* ===== MOBILE ===== */
 @media (max-width: 900px) {
   body { overflow-y: auto; }
-  .screen { position: relative; min-height: 100vh; opacity: 1 !important; transform: none !important; }
+  .screen { 
+    position: relative; 
+    min-height: 100vh; 
+    opacity: 1 !important; 
+    transform: none !important; 
+  }
   .screen:not(.active) { display: none; }
-  .updates-grid { grid-template-columns: 1fr; }
-  .credits-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; }
-  .credits-title { font-size: 1.5rem; }
+  .nav-boxes { 
+    grid-template-columns: 1fr; 
+    gap: 1.5rem;
+  }
+  .nav-box {
+    aspect-ratio: auto;
+    padding: 2rem 1rem;
+  }
+  .merch-grid { 
+    grid-template-columns: 1fr; 
+  }
+  .credits-grid { 
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
+    gap: 1.5rem; 
+  }
+  .page-title { 
+    font-size: 1.5rem; 
+  }
 }
 </style>
 </head>
@@ -373,6 +477,7 @@ form input {
   </a>
 </div>
 
+<!-- HOME SCREEN -->
 <div class="screen active" id="home">
   <div class="home-stack">
     <img src="wizshtlogo_trans.png" class="logo" id="logo">
@@ -380,22 +485,17 @@ form input {
   </div>
 </div>
 
+<!-- UPDATES SCREEN -->
 <div class="screen" id="updates">
-  <div class="updates-grid">
+  <div class="updates-container">
+    
+    <div class="nav-boxes">
+      <div class="nav-box" id="merchBtn">MERCH</div>
+      <div class="nav-box" id="contentBtn">CONTENT</div>
+      <div class="nav-box" id="creditsBtn">CREDITS</div>
+    </div>
 
-    <a class="merch-feature" href="https://wizard.printful.me/product/unisex-hoodie" target="_blank">
-      <img src="hoodie-front.png" class="merch-img">
-      <div class="merch-title">WIZARD HOODIE</div>
-    </a>
-
-    <div class="center-col">
-      <div class="video-card">
-        <a href="https://www.youtube.com/watch?v=H6cNCTofnrs" target="_blank">
-          <img src="https://img.youtube.com/vi/H6cNCTofnrs/hqdefault.jpg">
-        </a>
-        <div class="caption">Christmas In Wizard City</div>
-      </div>
-
+    <div class="email-section">
       <form id="emailForm">
         <input id="emailInput" type="email" name="email" placeholder="EMAIL FOR UPDATES" required>
         <button class="btn" type="submit">SUBMIT</button>
@@ -403,21 +503,53 @@ form input {
 
       <div class="form-success" id="formSuccess">SUBSCRIBED ✨</div>
 
-      <button class="btn" id="creditsBtn">CREDITS</button>
       <button class="btn btn-secondary" id="backBtn">BACK</button>
     </div>
-
-    <a class="merch-feature" href="https://wizard.printful.me/product/hoodie" target="_blank">
-      <img src="hoodie-2.png" class="merch-img">
-      <div class="merch-title">WIZARD HOODIE II</div>
-    </a>
 
   </div>
 </div>
 
+<!-- MERCH SCREEN -->
+<div class="screen" id="merch">
+  <div class="merch-container">
+    <div class="page-title">MERCH</div>
+    
+    <div class="merch-grid">
+      <a class="merch-feature" href="https://wizard.printful.me/product/unisex-hoodie" target="_blank">
+        <img src="hoodie-front.png" class="merch-img">
+        <div class="merch-title">WIZARD HOODIE</div>
+      </a>
+
+      <a class="merch-feature" href="https://wizard.printful.me/product/hoodie" target="_blank">
+        <img src="hoodie-2.png" class="merch-img">
+        <div class="merch-title">WIZARD HOODIE II</div>
+      </a>
+    </div>
+
+    <button class="btn btn-secondary" id="backFromMerchBtn">BACK</button>
+  </div>
+</div>
+
+<!-- CONTENT SCREEN -->
+<div class="screen" id="content">
+  <div class="content-container">
+    <div class="page-title">CONTENT</div>
+    
+    <div class="video-card">
+      <a href="https://www.youtube.com/watch?v=H6cNCTofnrs" target="_blank">
+        <img src="https://img.youtube.com/vi/H6cNCTofnrs/hqdefault.jpg">
+      </a>
+      <div class="caption">Christmas In Wizard City</div>
+    </div>
+
+    <button class="btn btn-secondary" id="backFromContentBtn">BACK</button>
+  </div>
+</div>
+
+<!-- CREDITS SCREEN -->
 <div class="screen" id="credits">
   <div class="credits-container">
-    <div class="credits-title">CREDITS</div>
+    <div class="page-title">CREDITS</div>
     
     <div class="credits-grid">
       
@@ -438,7 +570,7 @@ form input {
 
     </div>
 
-    <button class="btn btn-secondary" id="backToUpdatesBtn">BACK</button>
+    <button class="btn btn-secondary" id="backFromCreditsBtn">BACK</button>
   </div>
 </div>
 
@@ -448,14 +580,21 @@ document.body.classList.add(isMobile ? "mobile" : "desktop");
 
 const home = document.getElementById("home");
 const updates = document.getElementById("updates");
+const merch = document.getElementById("merch");
+const content = document.getElementById("content");
 const credits = document.getElementById("credits");
+
 const enterBtn = document.getElementById("enterBtn");
 const backBtn = document.getElementById("backBtn");
+const merchBtn = document.getElementById("merchBtn");
+const contentBtn = document.getElementById("contentBtn");
 const creditsBtn = document.getElementById("creditsBtn");
-const backToUpdatesBtn = document.getElementById("backToUpdatesBtn");
+const backFromMerchBtn = document.getElementById("backFromMerchBtn");
+const backFromContentBtn = document.getElementById("backFromContentBtn");
+const backFromCreditsBtn = document.getElementById("backFromCreditsBtn");
+
 const cryptoField = document.getElementById("cryptoField");
 const emailInput = document.getElementById("emailInput");
-const logo = document.getElementById("logo");
 const waterLayer = document.getElementById("waterLayer");
 const waterVideo = document.getElementById("waterVideo");
 const form = document.getElementById("emailForm");
@@ -463,28 +602,29 @@ const successMsg = document.getElementById("formSuccess");
 
 waterVideo.playbackRate = 0.55;
 
+function showScreen(screenToShow) {
+  [home, updates, merch, content, credits].forEach(s => s.classList.remove("active"));
+  screenToShow.classList.add("active");
+}
+
 enterBtn.onclick = () => {
-  home.classList.remove("active");
-  updates.classList.add("active");
+  showScreen(updates);
   waterLayer.style.opacity = 1;
 };
 
 backBtn.onclick = () => {
-  updates.classList.remove("active");
-  home.classList.add("active");
+  showScreen(home);
   waterLayer.style.opacity = 0;
   cryptoField.innerHTML = "";
 };
 
-creditsBtn.onclick = () => {
-  updates.classList.remove("active");
-  credits.classList.add("active");
-};
+merchBtn.onclick = () => showScreen(merch);
+contentBtn.onclick = () => showScreen(content);
+creditsBtn.onclick = () => showScreen(credits);
 
-backToUpdatesBtn.onclick = () => {
-  credits.classList.remove("active");
-  updates.classList.add("active");
-};
+backFromMerchBtn.onclick = () => showScreen(updates);
+backFromContentBtn.onclick = () => showScreen(updates);
+backFromCreditsBtn.onclick = () => showScreen(updates);
 
 /* Formspree AJAX submit */
 form.addEventListener("submit", async e => {
