@@ -212,6 +212,7 @@ body::before {
   gap: 3rem;
   width: min(1200px, 92vw);
   padding-top: 4rem;
+  padding-bottom: 8rem;
 }
 
 .top-section {
@@ -505,13 +506,21 @@ form input {
     transform: none !important; 
   }
   .screen:not(.active) { display: none; }
+  
+  .updates-container {
+    padding-top: 2rem;
+    padding-bottom: 10rem;
+    gap: 2rem;
+  }
+  
   .top-section {
     flex-direction: column;
     gap: 1.5rem;
   }
   .content-title {
     font-size: 2.5rem;
-    padding: 1.5rem;
+    padding: 0;
+    justify-content: center;
   }
   .right-buttons {
     width: 100%;
@@ -521,10 +530,24 @@ form input {
   }
   .videos-section {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
+  
+  .email-section {
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+  }
+  
   .merch-grid { 
     grid-template-columns: 1fr; 
   }
+  
+  .merch-container,
+  .content-container,
+  .credits-container {
+    padding-bottom: 8rem;
+  }
+  
   .credits-grid { 
     grid-template-columns: repeat(auto-fill, 140px); 
     gap: 0.8rem;
