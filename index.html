@@ -371,9 +371,10 @@ form input {
   width: min(1400px, 95vw);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 2rem;
   padding: 2rem;
+  padding-top: 3rem;
 }
 
 .credits-container .page-title {
@@ -388,14 +389,16 @@ form input {
 
 .credits-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, 160px);
   gap: 1rem;
   width: 100%;
   max-width: 100%;
+  justify-content: start;
 }
 
 .bio-card {
-  aspect-ratio: 1;
+  width: 160px;
+  height: 160px;
   padding: 1rem;
   border-radius: 14px;
   background: rgba(255,255,255,0.08);
@@ -463,8 +466,13 @@ form input {
     grid-template-columns: 1fr; 
   }
   .credits-grid { 
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); 
-    gap: 0.8rem; 
+    grid-template-columns: repeat(auto-fill, 140px); 
+    gap: 0.8rem;
+    justify-content: center;
+  }
+  .bio-card {
+    width: 140px;
+    height: 140px;
   }
   .page-title { 
     font-size: 1.5rem; 
