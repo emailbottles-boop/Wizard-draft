@@ -178,8 +178,10 @@ body::before {
 /* ===== DONATE ===== */
 .donate-wrap {
   position: fixed;
-  top: 32px;
-  right: 32px;
+  bottom: 32px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
   z-index: 6;
 }
 
@@ -207,10 +209,11 @@ body::before {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3rem;
+  gap: 2rem;
   width: min(1200px, 92vw);
   padding-top: 2rem;
   padding-bottom: 3rem;
+  margin: 0 auto;
 }
 
 .top-section {
@@ -219,12 +222,12 @@ body::before {
   align-items: flex-start;
   width: 100%;
   gap: 2rem;
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 .content-title {
   flex: 1;
-  font-size: 4rem;
+  font-size: 5.5rem;
   font-weight: 900;
   letter-spacing: 0.3em;
   background: linear-gradient(135deg, #ffe066, #b000ff);
@@ -239,12 +242,12 @@ body::before {
 .right-buttons {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.2rem;
 }
 
 .nav-box-small {
-  min-width: 200px;
-  padding: 1.5rem 2rem;
+  min-width: 180px;
+  padding: 1.2rem 1.8rem;
   border-radius: 18px;
   background: rgba(255,255,255,0.08);
   border: 2px solid rgba(180,80,255,0.3);
@@ -252,7 +255,7 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 900;
   letter-spacing: 0.25em;
   cursor: pointer;
@@ -272,6 +275,7 @@ body::before {
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   width: 100%;
+  margin-top: -1rem;
 }
 
 .videos-section .video-card {
@@ -301,6 +305,7 @@ body::before {
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
+  padding-bottom: 6rem;
 }
 
 /* ===== FORM ===== */
@@ -507,8 +512,7 @@ form input {
   .screen:not(.active) { display: none; }
   
   .donate-wrap {
-    top: 16px;
-    right: 16px;
+    bottom: 16px;
   }
   
   .donate-btn {
@@ -526,6 +530,7 @@ form input {
   .top-section {
     flex-direction: column;
     gap: 1.5rem;
+    margin-top: 1rem;
   }
   .content-title {
     font-size: 2.5rem;
@@ -541,11 +546,12 @@ form input {
   .videos-section {
     grid-template-columns: 1fr;
     gap: 2rem;
+    margin-top: 0;
   }
   
   .email-section {
     gap: 1.5rem;
-    padding-bottom: 2rem;
+    padding-bottom: 8rem;
   }
   
   .merch-grid { 
@@ -555,7 +561,7 @@ form input {
   .merch-container,
   .content-container,
   .credits-container {
-    padding-bottom: 3rem;
+    padding-bottom: 8rem;
   }
   
   .credits-grid { 
